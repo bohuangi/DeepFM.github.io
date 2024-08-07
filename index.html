@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Exemplification of "DeepFM: Outband-Semantic Enhancement for Analog Signal"</title>
+    <meta charset="UTF-8">
+    <title>DeepFM: Outband-Semantic Enhancement for Analog Signal</title>
+    <style>
+        red {color: red}
+        audio {width: 250px}
+    </style>
+  </head>
+  <body>
+    <article>
+      <header>
+        <h1>Exemplification of "DeepFM: Outband-Semantic Enhancement for Analog Signal"</h1>
+      </header>
+    </article>
+    <div style="font-size: 18px;">
+        <b>Abstract:</b>
+        Analog communications are still widely used in various fields today, such as radio, television, walkie-talkies and etc.. This is due to analog communication being cheap, having low energy consumption, no cliff effect, and importantly, a huge user base due to its long history. Despite this, analog signals are still susceptible to noise, interference, and other factors that affect their reception quality, making it difficult to achieve high-fidelity signal transmission. Therefore, we attempt to add a small amount of digital communication to carry semantic representations, aiming to restore analog signals and achieve high-fidelity recovery. Taking traditional FM communication as an example, we introduce digital semantic information and construct an analog signal recovery model named DeepFM to improve the quality of analog communication while ensuring compatibility. Finally, through extensive experiments, we find that high-fidelity recovery can be achieved even when the semantic representation is carried on a 0.5 Kbps digital channel.
+      <p></p>
+      </div>
+    <img src="images\model structure.jpg" style="width: 80%; height: auto;display: block; margin-left: auto; margin-right: auto;" alt="model structure">
+
+    <div>
+        <a name="Demos"><h2>FM Received Audio with Extremely Poor Quality</h2></a>
+        <hr>
+        <table>
+          <tbody>
+          <tr>
+            <td nowrap width="160">Original Audio</td>
+              <td><audio controls="" preload="none"><source src="demos\s_23_00.wav"></audio></td>
+              <td style="border-left: 1px solid #000000;"><audio controls="" preload="none"><source src="demos\s_23_01.wav"></audio></td>
+              <td style="border-left: 1px solid #000000;"><audio controls="" preload="none"><source src="demos\s_23_02.wav"></audio></td>
+              <td style="border-left: 1px solid #000000;"><audio controls="" preload="none"><source src="demos\s_23_03.wav"></audio></td>
+              <td style="border-left: 1px solid #000000;"><audio controls="" preload="none"><source src="demos\s_23_04.wav"></audio></td>
+          </tr>
+          <tr>
+            <td nowrap>FM Received Audio
+              <td><audio controls="" preload="none"><source src="demos\f_23_00.wav"></audio></td>
+              <td style="border-left: 1px solid #000000;"><audio controls="" preload="none"><source src="demos\f_23_01.wav"></audio></td>
+              <td style="border-left: 1px solid #000000;"><audio controls="" preload="none"><source src="demos\f_23_02.wav"></audio></td>
+              <td style="border-left: 1px solid #000000;"><audio controls="" preload="none"><source src="demos\f_23_03.wav"></audio></td>
+              <td style="border-left: 1px solid #000000;"><audio controls="" preload="none"><source src="demos\f_23_04.wav"></audio></td>
+          </tr>
+          <tr>
+            <td nowrap>DeepFM-0.5
+              <td><audio controls="" preload="none"><source src="demos\0.5_23_00.wav"></audio></td>
+              <td style="border-left: 1px solid #000000;"><audio controls="" preload="none"><source src="demos\0.5_23_01.wav"></audio></td>
+              <td style="border-left: 1px solid #000000;"><audio controls="" preload="none"><source src="demos\0.5_23_02.wav"></audio></td>
+              <td style="border-left: 1px solid #000000;"><audio controls="" preload="none"><source src="demos\0.5_23_03.wav"></audio></td>
+              <td style="border-left: 1px solid #000000;"><audio controls="" preload="none"><source src="demos\0.5_23_04.wav"></audio></td>
+          </tr>
+          <tr>
+            <td nowrap>DeepFM-1.5
+              <td><audio controls="" preload="none"><source src="demos\1.5_23_00.wav"></audio></td>
+              <td style="border-left: 1px solid #000000;"><audio controls="" preload="none"><source src="demos\1.5_23_01.wav"></audio></td>
+              <td style="border-left: 1px solid #000000;"><audio controls="" preload="none"><source src="demos\1.5_23_02.wav"></audio></td>
+              <td style="border-left: 1px solid #000000;"><audio controls="" preload="none"><source src="demos\1.5_23_03.wav"></audio></td>
+              <td style="border-left: 1px solid #000000;"><audio controls="" preload="none"><source src="demos\1.5_23_04.wav"></audio></td>
+          </tr>
+          <tr>
+            <td nowrap>DeepFM-3
+              <td><audio controls="" preload="none"><source src="demos\3_23_00.wav"></audio></td>
+              <td style="border-left: 1px solid #000000;"><audio controls="" preload="none"><source src="demos\3_23_01.wav"></audio></td>
+              <td style="border-left: 1px solid #000000;"><audio controls="" preload="none"><source src="demos\3_23_02.wav"></audio></td>
+              <td style="border-left: 1px solid #000000;"><audio controls="" preload="none"><source src="demos\3_23_03.wav"></audio></td>
+              <td style="border-left: 1px solid #000000;"><audio controls="" preload="none"><source src="demos\3_23_04.wav"></audio></td>
+          </tr>
+          <tr>
+            <td nowrap>DeepFM-6
+              <td><audio controls="" preload="none"><source src="demos\6_23_00.wav"></audio></td>
+              <td style="border-left: 1px solid #000000;"><audio controls="" preload="none"><source src="demos\6_23_01.wav"></audio></td>
+              <td style="border-left: 1px solid #000000;"><audio controls="" preload="none"><source src="demos\6_23_02.wav"></audio></td>
+              <td style="border-left: 1px solid #000000;"><audio controls="" preload="none"><source src="demos\6_23_03.wav"></audio></td>
+              <td style="border-left: 1px solid #000000;"><audio controls="" preload="none"><source src="demos\6_23_04.wav"></audio></td>
+          </tr>
+          <tr>
+            <td nowrap>DeepFM-12
+              <td><audio controls="" preload="none"><source src="demos\12_23_00.wav"></audio></td>
+              <td style="border-left: 1px solid #000000;"><audio controls="" preload="none"><source src="demos\12_23_01.wav"></audio></td>
+              <td style="border-left: 1px solid #000000;"><audio controls="" preload="none"><source src="demos\12_23_02.wav"></audio></td>
+              <td style="border-left: 1px solid #000000;"><audio controls="" preload="none"><source src="demos\12_23_03.wav"></audio></td>
+              <td style="border-left: 1px solid #000000;"><audio controls="" preload="none"><source src="demos\12_23_04.wav"></audio></td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+      <br><br>
+      <div>
+        <a name="Demos"><h2>FM Received Audio with Poor Quality</h2></a>
+        <hr>
+        <table>
+          <tbody>
+          <tr>
+            <td nowrap width="160">Original Audio</td>
+            <td><audio controls="" preload="none"><source src="demos\s_15_00.wav"></audio></td>
+              <td style="border-left: 1px solid #000000;"><audio controls="" preload="none"><source src="demos\s_15_01.wav"></audio></td>
+              <td style="border-left: 1px solid #000000;"><audio controls="" preload="none"><source src="demos\s_15_02.wav"></audio></td>
+              <td style="border-left: 1px solid #000000;"><audio controls="" preload="none"><source src="demos\s_15_03.wav"></audio></td>
+              <td style="border-left: 1px solid #000000;"><audio controls="" preload="none"><source src="demos\s_15_04.wav"></audio></td>
+          </tr>
+          <tr>
+            <td nowrap>FM Received Audio
+              <td><audio controls="" preload="none"><source src="demos\f_15_00.wav"></audio></td>
+              <td style="border-left: 1px solid #000000;"><audio controls="" preload="none"><source src="demos\f_15_01.wav"></audio></td>
+              <td style="border-left: 1px solid #000000;"><audio controls="" preload="none"><source src="demos\f_15_02.wav"></audio></td>
+              <td style="border-left: 1px solid #000000;"><audio controls="" preload="none"><source src="demos\f_15_03.wav"></audio></td>
+              <td style="border-left: 1px solid #000000;"><audio controls="" preload="none"><source src="demos\f_15_04.wav"></audio></td>
+          </tr>
+          <tr>
+            <td nowrap>DeepFM-0.5
+              <td><audio controls="" preload="none"><source src="demos\0.5_15_00.wav"></audio></td>
+              <td style="border-left: 1px solid #000000;"><audio controls="" preload="none"><source src="demos\0.5_15_01.wav"></audio></td>
+              <td style="border-left: 1px solid #000000;"><audio controls="" preload="none"><source src="demos\0.5_15_02.wav"></audio></td>
+              <td style="border-left: 1px solid #000000;"><audio controls="" preload="none"><source src="demos\0.5_15_03.wav"></audio></td>
+              <td style="border-left: 1px solid #000000;"><audio controls="" preload="none"><source src="demos\0.5_15_04.wav"></audio></td>
+          </tr>
+          <tr>
+            <td nowrap>DeepFM-1.5
+              <td><audio controls="" preload="none"><source src="demos\1.5_15_00.wav"></audio></td>
+              <td style="border-left: 1px solid #000000;"><audio controls="" preload="none"><source src="demos\1.5_15_01.wav"></audio></td>
+              <td style="border-left: 1px solid #000000;"><audio controls="" preload="none"><source src="demos\1.5_15_02.wav"></audio></td>
+              <td style="border-left: 1px solid #000000;"><audio controls="" preload="none"><source src="demos\1.5_15_03.wav"></audio></td>
+              <td style="border-left: 1px solid #000000;"><audio controls="" preload="none"><source src="demos\1.5_15_04.wav"></audio></td>
+          </tr>
+          <tr>
+            <td nowrap>DeepFM-3
+              <td><audio controls="" preload="none"><source src="demos\3_15_00.wav"></audio></td>
+              <td style="border-left: 1px solid #000000;"><audio controls="" preload="none"><source src="demos\3_15_01.wav"></audio></td>
+              <td style="border-left: 1px solid #000000;"><audio controls="" preload="none"><source src="demos\3_15_02.wav"></audio></td>
+              <td style="border-left: 1px solid #000000;"><audio controls="" preload="none"><source src="demos\3_15_03.wav"></audio></td>
+              <td style="border-left: 1px solid #000000;"><audio controls="" preload="none"><source src="demos\3_15_04.wav"></audio></td>
+          </tr>
+          <tr>
+            <td nowrap>DeepFM-6
+              <td><audio controls="" preload="none"><source src="demos\6_15_00.wav"></audio></td>
+              <td style="border-left: 1px solid #000000;"><audio controls="" preload="none"><source src="demos\6_15_01.wav"></audio></td>
+              <td style="border-left: 1px solid #000000;"><audio controls="" preload="none"><source src="demos\6_15_02.wav"></audio></td>
+              <td style="border-left: 1px solid #000000;"><audio controls="" preload="none"><source src="demos\6_15_03.wav"></audio></td>
+              <td style="border-left: 1px solid #000000;"><audio controls="" preload="none"><source src="demos\6_15_04.wav"></audio></td>
+          </tr>
+          <tr>
+            <td nowrap>DeepFM-12
+              <td><audio controls="" preload="none"><source src="demos\12_15_00.wav"></audio></td>
+              <td style="border-left: 1px solid #000000;"><audio controls="" preload="none"><source src="demos\12_15_01.wav"></audio></td>
+              <td style="border-left: 1px solid #000000;"><audio controls="" preload="none"><source src="demos\12_15_02.wav"></audio></td>
+              <td style="border-left: 1px solid #000000;"><audio controls="" preload="none"><source src="demos\12_15_03.wav"></audio></td>
+              <td style="border-left: 1px solid #000000;"><audio controls="" preload="none"><source src="demos\12_15_04.wav"></audio></td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+      <br><br>
+      <div>
+        <a name="Demos"><h2>FM Received Audio with Good Quality</h2></a>
+        <hr>
+        <table>
+          <tbody>
+          <tr>
+            <td nowrap width="160">Original Audio</td>
+            <td><audio controls="" preload="none"><source src="demos\s_6_00.wav"></audio></td>
+              <td style="border-left: 1px solid #000000;"><audio controls="" preload="none"><source src="demos\s_6_01.wav"></audio></td>
+              <td style="border-left: 1px solid #000000;"><audio controls="" preload="none"><source src="demos\s_6_02.wav"></audio></td>
+              <td style="border-left: 1px solid #000000;"><audio controls="" preload="none"><source src="demos\s_6_03.wav"></audio></td>
+              <td style="border-left: 1px solid #000000;"><audio controls="" preload="none"><source src="demos\s_6_04.wav"></audio></td>
+          </tr>
+          <tr>
+            <td nowrap>FM Received Audio
+              <td><audio controls="" preload="none"><source src="demos\f_6_00.wav"></audio></td>
+              <td style="border-left: 1px solid #000000;"><audio controls="" preload="none"><source src="demos\f_6_01.wav"></audio></td>
+              <td style="border-left: 1px solid #000000;"><audio controls="" preload="none"><source src="demos\f_6_02.wav"></audio></td>
+              <td style="border-left: 1px solid #000000;"><audio controls="" preload="none"><source src="demos\f_6_03.wav"></audio></td>
+              <td style="border-left: 1px solid #000000;"><audio controls="" preload="none"><source src="demos\f_6_04.wav"></audio></td>
+          </tr>
+          <tr>
+            <td nowrap>DeepFM-0.5
+              <td><audio controls="" preload="none"><source src="demos\0.5_6_00.wav"></audio></td>
+              <td style="border-left: 1px solid #000000;"><audio controls="" preload="none"><source src="demos\0.5_6_01.wav"></audio></td>
+              <td style="border-left: 1px solid #000000;"><audio controls="" preload="none"><source src="demos\0.5_6_02.wav"></audio></td>
+              <td style="border-left: 1px solid #000000;"><audio controls="" preload="none"><source src="demos\0.5_6_03.wav"></audio></td>
+              <td style="border-left: 1px solid #000000;"><audio controls="" preload="none"><source src="demos\0.5_6_04.wav"></audio></td>
+          </tr>
+          <tr>
+            <td nowrap>DeepFM-1.5
+              <td><audio controls="" preload="none"><source src="demos\1.5_6_00.wav"></audio></td>
+              <td style="border-left: 1px solid #000000;"><audio controls="" preload="none"><source src="demos\1.5_6_01.wav"></audio></td>
+              <td style="border-left: 1px solid #000000;"><audio controls="" preload="none"><source src="demos\1.5_6_02.wav"></audio></td>
+              <td style="border-left: 1px solid #000000;"><audio controls="" preload="none"><source src="demos\1.5_6_03.wav"></audio></td>
+              <td style="border-left: 1px solid #000000;"><audio controls="" preload="none"><source src="demos\1.5_6_04.wav"></audio></td>
+          </tr>
+          <tr>
+            <td nowrap>DeepFM-3
+              <td><audio controls="" preload="none"><source src="demos\3_6_00.wav"></audio></td>
+              <td style="border-left: 1px solid #000000;"><audio controls="" preload="none"><source src="demos\3_6_01.wav"></audio></td>
+              <td style="border-left: 1px solid #000000;"><audio controls="" preload="none"><source src="demos\3_6_02.wav"></audio></td>
+              <td style="border-left: 1px solid #000000;"><audio controls="" preload="none"><source src="demos\3_6_03.wav"></audio></td>
+              <td style="border-left: 1px solid #000000;"><audio controls="" preload="none"><source src="demos\3_6_04.wav"></audio></td>
+          </tr>
+          <tr>
+            <td nowrap>DeepFM-6
+              <td><audio controls="" preload="none"><source src="demos\6_6_00.wav"></audio></td>
+              <td style="border-left: 1px solid #000000;"><audio controls="" preload="none"><source src="demos\6_6_01.wav"></audio></td>
+              <td style="border-left: 1px solid #000000;"><audio controls="" preload="none"><source src="demos\6_6_02.wav"></audio></td>
+              <td style="border-left: 1px solid #000000;"><audio controls="" preload="none"><source src="demos\6_6_03.wav"></audio></td>
+              <td style="border-left: 1px solid #000000;"><audio controls="" preload="none"><source src="demos\6_6_04.wav"></audio></td>
+          </tr>
+          <tr>
+            <td nowrap>DeepFM-12
+              <td><audio controls="" preload="none"><source src="demos\12_6_00.wav"></audio></td>
+              <td style="border-left: 1px solid #000000;"><audio controls="" preload="none"><source src="demos\12_6_01.wav"></audio></td>
+              <td style="border-left: 1px solid #000000;"><audio controls="" preload="none"><source src="demos\12_6_02.wav"></audio></td>
+              <td style="border-left: 1px solid #000000;"><audio controls="" preload="none"><source src="demos\12_6_03.wav"></audio></td>
+              <td style="border-left: 1px solid #000000;"><audio controls="" preload="none"><source src="demos\12_6_04.wav"></audio></td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+      <br><br>
+      <div>
+        <a name="Demos"><h2>FM Received Audio with Excellent Quality</h2></a>
+        <hr>
+        <table>
+          <tbody>
+          <tr>
+            <td nowrap width="160">Original Audio</td>
+            <td><audio controls="" preload="none"><source src="demos\s_20_00.wav"></audio></td>
+              <td style="border-left: 1px solid #000000;"><audio controls="" preload="none"><source src="demos\s_20_01.wav"></audio></td>
+              <td style="border-left: 1px solid #000000;"><audio controls="" preload="none"><source src="demos\s_20_02.wav"></audio></td>
+              <td style="border-left: 1px solid #000000;"><audio controls="" preload="none"><source src="demos\s_20_03.wav"></audio></td>
+              <td style="border-left: 1px solid #000000;"><audio controls="" preload="none"><source src="demos\s_20_04.wav"></audio></td>
+          </tr>
+          <tr>
+            <td nowrap>FM Received Audio
+              <td><audio controls="" preload="none"><source src="demos\f_20_00.wav"></audio></td>
+              <td style="border-left: 1px solid #000000;"><audio controls="" preload="none"><source src="demos\f_20_01.wav"></audio></td>
+              <td style="border-left: 1px solid #000000;"><audio controls="" preload="none"><source src="demos\f_20_02.wav"></audio></td>
+              <td style="border-left: 1px solid #000000;"><audio controls="" preload="none"><source src="demos\f_20_03.wav"></audio></td>
+              <td style="border-left: 1px solid #000000;"><audio controls="" preload="none"><source src="demos\f_20_04.wav"></audio></td>
+          </tr>
+          <tr>
+            <td nowrap>DeepFM-0.5
+              <td><audio controls="" preload="none"><source src="demos\0.5_20_00.wav"></audio></td>
+              <td style="border-left: 1px solid #000000;"><audio controls="" preload="none"><source src="demos\0.5_20_01.wav"></audio></td>
+              <td style="border-left: 1px solid #000000;"><audio controls="" preload="none"><source src="demos\0.5_20_02.wav"></audio></td>
+              <td style="border-left: 1px solid #000000;"><audio controls="" preload="none"><source src="demos\0.5_20_03.wav"></audio></td>
+              <td style="border-left: 1px solid #000000;"><audio controls="" preload="none"><source src="demos\0.5_20_04.wav"></audio></td>
+          </tr>
+          <tr>
+            <td nowrap>DeepFM-1.5
+              <td><audio controls="" preload="none"><source src="demos\1.5_20_00.wav"></audio></td>
+              <td style="border-left: 1px solid #000000;"><audio controls="" preload="none"><source src="demos\1.5_20_01.wav"></audio></td>
+              <td style="border-left: 1px solid #000000;"><audio controls="" preload="none"><source src="demos\1.5_20_02.wav"></audio></td>
+              <td style="border-left: 1px solid #000000;"><audio controls="" preload="none"><source src="demos\1.5_20_03.wav"></audio></td>
+              <td style="border-left: 1px solid #000000;"><audio controls="" preload="none"><source src="demos\1.5_20_04.wav"></audio></td>
+          </tr>
+          <tr>
+            <td nowrap>DeepFM-3
+              <td><audio controls="" preload="none"><source src="demos\3_20_00.wav"></audio></td>
+              <td style="border-left: 1px solid #000000;"><audio controls="" preload="none"><source src="demos\3_20_01.wav"></audio></td>
+              <td style="border-left: 1px solid #000000;"><audio controls="" preload="none"><source src="demos\3_20_02.wav"></audio></td>
+              <td style="border-left: 1px solid #000000;"><audio controls="" preload="none"><source src="demos\3_20_03.wav"></audio></td>
+              <td style="border-left: 1px solid #000000;"><audio controls="" preload="none"><source src="demos\3_20_04.wav"></audio></td>
+          </tr>
+          <tr>
+            <td nowrap>DeepFM-6
+              <td><audio controls="" preload="none"><source src="demos\6_20_00.wav"></audio></td>
+              <td style="border-left: 1px solid #000000;"><audio controls="" preload="none"><source src="demos\6_20_01.wav"></audio></td>
+              <td style="border-left: 1px solid #000000;"><audio controls="" preload="none"><source src="demos\6_20_02.wav"></audio></td>
+              <td style="border-left: 1px solid #000000;"><audio controls="" preload="none"><source src="demos\6_20_03.wav"></audio></td>
+              <td style="border-left: 1px solid #000000;"><audio controls="" preload="none"><source src="demos\6_20_04.wav"></audio></td>
+          </tr>
+          <tr>
+            <td nowrap>DeepFM-12
+              <td><audio controls="" preload="none"><source src="demos\12_20_00.wav"></audio></td>
+              <td style="border-left: 1px solid #000000;"><audio controls="" preload="none"><source src="demos\12_20_01.wav"></audio></td>
+              <td style="border-left: 1px solid #000000;"><audio controls="" preload="none"><source src="demos\12_20_02.wav"></audio></td>
+              <td style="border-left: 1px solid #000000;"><audio controls="" preload="none"><source src="demos\12_20_03.wav"></audio></td>
+              <td style="border-left: 1px solid #000000;"><audio controls="" preload="none"><source src="demos\12_20_04.wav"></audio></td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+  </body>
